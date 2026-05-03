@@ -1,0 +1,265 @@
+---
+import { SITE } from "~/config/site";
+import CTA from "~/components/CTA.astro";
+---
+
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__content">
+      <span class="eyebrow">Open-source · Family-first · Hackable</span>
+      <h1 class="hero__title">
+        Audio adventures for kids.
+        <span class="hero__title-accent">Fully open-source.</span>
+      </h1>
+      <p class="hero__lead">
+        OpenHush is the family audio player you can actually own. <strong>Hush</strong> is the device.
+        <strong>Whispers</strong> are the cards. The whole stack — hardware, firmware, dashboard — is
+        out in the open.
+      </p>
+      <div class="hero__ctas">
+        <CTA href="#hush" variant="secondary" size="lg">Meet Hush</CTA>
+        <CTA href={SITE.repo} variant="ghost" size="lg" external>
+          <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true">
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38v-1.33c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.81.06 1.23.83 1.23.83.72 1.23 1.88.88 2.34.67.07-.52.28-.88.51-1.08-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82a7.6 7.6 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.86 3.75-3.64 3.95.29.25.54.74.54 1.49v2.21c0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"
+            />
+          </svg>
+          Star on GitHub
+        </CTA>
+      </div>
+      <p class="hero__meta">
+        <span class="hero__dot" aria-hidden="true"></span>
+        No accounts. No ads. No surveillance. Just stories.
+      </p>
+    </div>
+
+    <div class="hero__visual" aria-hidden="true">
+      <div class="device">
+        <div class="device__screen">
+          <div class="device__wave"></div>
+        </div>
+        <div class="device__body">
+          <span class="device__label">HUSH</span>
+          <div class="device__buttons">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="device__slot">
+          <div class="whisper">
+            <div class="whisper__dot"></div>
+            <div class="whisper__lines">
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(60% 60% at 80% 20%, var(--color-accent-soft) 0%, transparent 60%),
+      radial-gradient(50% 50% at 10% 90%, rgba(245, 194, 107, 0.35) 0%, transparent 60%),
+      var(--color-bg);
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(31, 27, 23, 0.06) 1px, transparent 0);
+    background-size: 28px 28px;
+    mask-image: linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent);
+    pointer-events: none;
+  }
+  .hero__inner {
+    position: relative;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding: var(--space-9) var(--space-5) var(--space-8);
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: var(--space-7);
+    align-items: center;
+  }
+
+  .hero__title {
+    font-size: var(--fs-900);
+    line-height: 1.05;
+  }
+  .hero__title-accent {
+    display: block;
+    color: var(--color-accent);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .hero__lead {
+    margin-top: var(--space-5);
+    font-size: var(--fs-400);
+    line-height: 1.55;
+    color: var(--color-muted);
+    max-width: 38ch;
+  }
+  .hero__lead strong {
+    color: var(--color-fg);
+    font-weight: 600;
+  }
+  .hero__ctas {
+    margin-top: var(--space-6);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  .hero__meta {
+    margin-top: var(--space-5);
+    font-size: var(--fs-100);
+    color: var(--color-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .hero__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-accent-3);
+    box-shadow: 0 0 0 4px rgba(122, 161, 122, 0.2);
+    display: inline-block;
+  }
+
+  /* Decorative device + whisper */
+  .hero__visual {
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+  .device {
+    position: relative;
+    width: min(100%, 360px);
+    aspect-ratio: 4 / 5;
+    background: linear-gradient(180deg, #fff 0%, #fdeed8 100%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-5);
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+    gap: var(--space-4);
+    transform: rotate(-3deg);
+    transition: transform var(--duration) var(--ease-out);
+  }
+  .device:hover {
+    transform: rotate(-1deg) translateY(-4px);
+  }
+  .device__screen {
+    background: var(--color-fg);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+  .device__wave {
+    width: 70%;
+    height: 56px;
+    background-image:
+      linear-gradient(90deg, var(--color-accent) 0 12%, transparent 12% 22%),
+      linear-gradient(90deg, var(--color-accent-2) 0 8%, transparent 8% 22%),
+      linear-gradient(90deg, var(--color-accent) 0 16%, transparent 16% 22%);
+    background-size: 100% 8px, 100% 16px, 100% 28px;
+    background-position: 0 50%;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    animation: pulse 2.4s var(--ease-out) infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.85; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.4); }
+  }
+  .device__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .device__label {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: var(--fs-100);
+    letter-spacing: 0.2em;
+    color: var(--color-muted);
+  }
+  .device__buttons {
+    display: flex;
+    gap: 0.45rem;
+  }
+  .device__buttons span {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-border);
+  }
+  .device__buttons span:nth-child(2) {
+    background: var(--color-accent);
+  }
+  .device__slot {
+    background: rgba(31, 27, 23, 0.04);
+    border-radius: var(--radius-md);
+    padding: var(--space-3);
+    display: grid;
+    place-items: center;
+  }
+
+  .whisper {
+    width: 100%;
+    aspect-ratio: 5 / 2;
+    background: var(--color-accent-2);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-3);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    transform: rotate(2deg);
+  }
+  .whisper__dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-fg);
+    flex-shrink: 0;
+  }
+  .whisper__lines {
+    display: grid;
+    gap: 6px;
+    width: 100%;
+  }
+  .whisper__lines span {
+    display: block;
+    height: 6px;
+    background: rgba(31, 27, 23, 0.4);
+    border-radius: 3px;
+  }
+  .whisper__lines span:last-child {
+    width: 60%;
+  }
+
+  @media (max-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+      padding-block: var(--space-8);
+    }
+    .hero__visual {
+      order: -1;
+    }
+    .device {
+      transform: rotate(-2deg) scale(0.85);
+    }
+  }
+</style>

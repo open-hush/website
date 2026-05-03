@@ -1,0 +1,75 @@
+---
+interface Props {
+  href: string;
+  variant?: "primary" | "secondary" | "ghost";
+  size?: "md" | "lg";
+  external?: boolean;
+}
+
+const { href, variant = "primary", size = "md", external = false } = Astro.props;
+const rel = external ? "noreferrer noopener" : undefined;
+const target = external ? "_blank" : undefined;
+---
+
+<a
+  href={href}
+  rel={rel}
+  target={target}
+  class:list={["cta", `cta--${variant}`, `cta--${size}`]}
+>
+  <slot />
+</a>
+
+<style>
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    transition:
+      transform var(--duration-fast) var(--ease-out),
+      background var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
+    border: 1px solid transparent;
+    white-space: nowrap;
+  }
+  .cta--md {
+    padding: 0.65rem 1.2rem;
+    font-size: var(--fs-200);
+  }
+  .cta--lg {
+    padding: 0.95rem 1.6rem;
+    font-size: var(--fs-300);
+  }
+  .cta--primary {
+    background: var(--color-fg);
+    color: var(--color-bg);
+  }
+  .cta--primary:hover {
+    background: var(--color-accent);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+  .cta--secondary {
+    background: var(--color-accent);
+    color: #fff;
+  }
+  .cta--secondary:hover {
+    background: var(--color-fg);
+    color: var(--color-bg);
+    transform: translateY(-1px);
+  }
+  .cta--ghost {
+    background: transparent;
+    color: var(--color-fg);
+    border-color: var(--color-border);
+  }
+  .cta--ghost:hover {
+    border-color: var(--color-fg);
+    color: var(--color-fg);
+    transform: translateY(-1px);
+  }
+</style>

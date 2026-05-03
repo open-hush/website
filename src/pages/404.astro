@@ -1,0 +1,46 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import CTA from "~/components/CTA.astro";
+---
+
+<BaseLayout title="Lost in the woods" description="That page doesn't exist — but the rest of OpenHush does.">
+  <section class="notfound">
+    <div class="notfound__inner">
+      <span class="eyebrow">404 · shhh</span>
+      <h1>This Whisper isn't bound to anything.</h1>
+      <p class="lead">
+        The page you tried to play doesn't exist (or moved). Tap on something else?
+      </p>
+      <div class="notfound__ctas">
+        <CTA href="/" variant="secondary" size="lg">Back home</CTA>
+        <CTA href="/developers" variant="ghost" size="lg">Developer guide</CTA>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    min-height: calc(100vh - var(--nav-height) - 200px);
+    display: grid;
+    place-items: center;
+    padding: var(--space-9) var(--space-5);
+    background:
+      radial-gradient(50% 50% at 50% 30%, var(--color-accent-soft) 0%, transparent 60%),
+      var(--color-bg);
+  }
+  .notfound__inner {
+    text-align: center;
+    max-width: 56ch;
+  }
+  .notfound h1 {
+    margin-block: var(--space-3) var(--space-4);
+  }
+  .notfound__ctas {
+    margin-top: var(--space-6);
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

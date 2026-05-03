@@ -1,0 +1,83 @@
+---
+import CodeBlock from "~/components/CodeBlock.astro";
+
+interface Step {
+  title: string;
+  description: string;
+  code?: string;
+  lang?: "bash" | "ts" | "json" | "yaml";
+  filename?: string;
+}
+
+interface Props {
+  steps: Step[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="steps">
+  {
+    steps.map((step, i) => (
+      <li class="step">
+        <div class="step__index" aria-hidden="true">
+          {String(i + 1).padStart(2, "0")}
+        </div>
+        <div class="step__content">
+          <h3 class="step__title">{step.title}</h3>
+          <p class="step__desc">{step.description}</p>
+          {step.code && (
+            <CodeBlock code={step.code} lang={step.lang ?? "bash"} filename={step.filename} />
+          )}
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-6);
+    counter-reset: step;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: var(--space-5);
+    align-items: start;
+  }
+  .step__index {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-md);
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: var(--fs-300);
+  }
+  [data-theme="tech"] .step__index {
+    background: rgba(126, 231, 135, 0.12);
+    color: var(--color-tech-accent);
+  }
+  .step__title {
+    font-size: var(--fs-500);
+    font-weight: 600;
+  }
+  .step__desc {
+    color: var(--color-muted);
+    margin-block: var(--space-2) var(--space-4);
+    max-width: 56ch;
+  }
+  @media (max-width: 600px) {
+    .step {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

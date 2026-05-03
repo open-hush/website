@@ -1,0 +1,89 @@
+---
+import { Code } from "astro:components";
+
+type ShikiLang =
+  | "bash"
+  | "shell"
+  | "ts"
+  | "tsx"
+  | "js"
+  | "json"
+  | "yaml"
+  | "html"
+  | "css";
+
+interface Props {
+  code: string;
+  lang?: ShikiLang;
+  filename?: string;
+}
+
+const { code, lang = "bash", filename } = Astro.props;
+---
+
+<figure class="codeblock">
+  {
+    filename && (
+      <figcaption class="codeblock__caption">
+        <span class="codeblock__dots" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span class="codeblock__filename">{filename}</span>
+      </figcaption>
+    )
+  }
+  <Code code={code} lang={lang} theme="github-dark" wrap />
+</figure>
+
+<style>
+  .codeblock {
+    border: 1px solid var(--color-tech-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-tech-bg);
+    box-shadow: var(--shadow-md);
+    margin: 0;
+  }
+  .codeblock__caption {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.9rem;
+    background: var(--color-tech-surface);
+    border-bottom: 1px solid var(--color-tech-border);
+    font-family: var(--font-mono);
+    font-size: var(--fs-100);
+    color: var(--color-tech-muted);
+  }
+  .codeblock__dots {
+    display: inline-flex;
+    gap: 6px;
+  }
+  .codeblock__dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3a4151;
+  }
+  .codeblock__dots span:nth-child(1) {
+    background: #ff5f56;
+  }
+  .codeblock__dots span:nth-child(2) {
+    background: #ffbd2e;
+  }
+  .codeblock__dots span:nth-child(3) {
+    background: #27c93f;
+  }
+  .codeblock__filename {
+    color: var(--color-tech-fg);
+  }
+  .codeblock :global(pre) {
+    margin: 0;
+    border-radius: 0;
+    padding: var(--space-5);
+    background: var(--color-tech-bg) !important;
+    font-size: var(--fs-200);
+  }
+</style>

@@ -1,0 +1,101 @@
+---
+interface Props {
+  icon?: "open" | "family" | "hack" | "shield" | "spark";
+  title: string;
+}
+
+const { icon, title } = Astro.props;
+---
+
+<article class="card">
+  {
+    icon && (
+      <span class="card__icon" aria-hidden="true">
+        {icon === "open" && (
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 019.9-1" />
+          </svg>
+        )}
+        {icon === "family" && (
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="8" r="3" />
+            <circle cx="17" cy="9" r="2" />
+            <path d="M2 21c0-3.5 3-6 7-6s7 2.5 7 6" />
+            <path d="M15 21c0-2 1-3.5 3-3.5s4 1.5 4 3.5" />
+          </svg>
+        )}
+        {icon === "hack" && (
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 4l-6 8 6 8" />
+            <path d="M16 4l6 8-6 8" />
+            <path d="M14 4l-4 16" />
+          </svg>
+        )}
+        {icon === "shield" && (
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+        )}
+        {icon === "spark" && (
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v6" />
+            <path d="M12 16v6" />
+            <path d="M2 12h6" />
+            <path d="M16 12h6" />
+            <path d="M5 5l4 4" />
+            <path d="M15 15l4 4" />
+            <path d="M19 5l-4 4" />
+            <path d="M9 15l-4 4" />
+          </svg>
+        )}
+      </span>
+    )
+  }
+  <h3 class="card__title">{title}</h3>
+  <div class="card__body">
+    <slot />
+  </div>
+</article>
+
+<style>
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    transition:
+      transform var(--duration) var(--ease-out),
+      box-shadow var(--duration) var(--ease-out),
+      border-color var(--duration) var(--ease-out);
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+  }
+  .card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    display: grid;
+    place-items: center;
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+  }
+  .card__title {
+    font-size: var(--fs-500);
+    font-weight: 600;
+  }
+  .card__body {
+    color: var(--color-muted);
+    line-height: 1.6;
+  }
+  .card__body :global(p + p) {
+    margin-top: var(--space-3);
+  }
+</style>

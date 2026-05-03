@@ -1,0 +1,502 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+import Hero from "~/components/Hero.astro";
+import ConceptCard from "~/components/ConceptCard.astro";
+import FeatureGrid from "~/components/FeatureGrid.astro";
+import CodeBlock from "~/components/CodeBlock.astro";
+import CTA from "~/components/CTA.astro";
+import { SITE } from "~/config/site";
+---
+
+<BaseLayout>
+  <Hero />
+
+  <Section id="what-is" variant="alt" paddingY="lg">
+    <header class="section-header">
+      <span class="eyebrow">What is OpenHush</span>
+      <h2>An audio player your family actually owns.</h2>
+      <p class="lead">
+        OpenHush brings the magic of card-driven audio to families — without the closed ecosystem,
+        the monthly fees, or the data harvesting. Stories, music, and learning, all under your
+        control.
+      </p>
+    </header>
+
+    <FeatureGrid cols={3}>
+      <ConceptCard icon="open" title="Open by default">
+        <p>
+          Hardware schematics, firmware, and dashboard code — all open-source and forkable. If you
+          can read it, you can change it.
+        </p>
+      </ConceptCard>
+      <ConceptCard icon="family" title="Made for families">
+        <p>
+          Designed around how kids actually use audio: tap a card, hear a story. No screens, no
+          algorithms nudging them toward the next thing.
+        </p>
+      </ConceptCard>
+      <ConceptCard icon="hack" title="Hackable end-to-end">
+        <p>
+          Author your own Whispers, swap firmware, self-host the dashboard, build new card types.
+          Bring your own ideas — and ship them.
+        </p>
+      </ConceptCard>
+    </FeatureGrid>
+  </Section>
+
+  <Section id="hush" paddingY="lg">
+    <div class="split">
+      <div class="split__media" aria-hidden="true">
+        <div class="hush-mock">
+          <div class="hush-mock__top">
+            <div class="hush-mock__antenna"></div>
+            <div class="hush-mock__screen">
+              <div class="hush-mock__bars">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+          <div class="hush-mock__face">
+            <div class="hush-mock__knob"></div>
+            <div class="hush-mock__buttons">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          <div class="hush-mock__slot">
+            <span>insert whisper</span>
+          </div>
+        </div>
+      </div>
+      <div class="split__content">
+        <span class="eyebrow">Hush · the device</span>
+        <h2>A friendly little box that just plays.</h2>
+        <p class="lead">
+          Hush is the speaker. A simple, durable device shaped for small hands. Tap a Whisper card,
+          and it plays. No app required. No login flow. No "are you a child?" dialogs. Just audio.
+        </p>
+        <ul class="checklist">
+          <li>
+            <strong>Privacy-first.</strong> Works offline. Cloud is optional, never required.
+          </li>
+          <li>
+            <strong>Self-hostable backend.</strong> Run your own dashboard at home, on a Pi, on a
+            VPS — your call.
+          </li>
+          <li>
+            <strong>Open hardware.</strong> Schematics, BOM, and firmware in the repo. Build it
+            yourself or buy a kit.
+          </li>
+          <li>
+            <strong>Sturdy by design.</strong> Built to survive being thrown across a room. Probably.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="whispers" variant="alt" paddingY="lg">
+    <div class="split split--reverse">
+      <div class="split__content">
+        <span class="eyebrow">Whispers · the cards</span>
+        <h2>Tap to play. That's the whole interaction.</h2>
+        <p class="lead">
+          A Whisper is a small NFC card linked to an audio playlist — a story, an album, a
+          meditation, a custom recording from grandma. Place it on Hush, and Hush plays. Take it off
+          to stop.
+        </p>
+        <FeatureGrid cols={2}>
+          <div class="mini-card">
+            <h4>Pre-made or DIY</h4>
+            <p>
+              Buy beautifully illustrated Whispers, or print blank ones and link them to whatever
+              audio you want.
+            </p>
+          </div>
+          <div class="mini-card">
+            <h4>Author from the dashboard</h4>
+            <p>
+              The OpenHush dashboard lets you upload audio, organize playlists, and bind a Whisper
+              in a few clicks.
+            </p>
+          </div>
+          <div class="mini-card">
+            <h4>Offline-friendly</h4>
+            <p>
+              Audio is cached on the device. Cards keep working in the car, on a flight, in the
+              countryside.
+            </p>
+          </div>
+          <div class="mini-card">
+            <h4>Yours forever</h4>
+            <p>
+              Your audio lives in your library. No subscription required to keep listening to what
+              you already paid for.
+            </p>
+          </div>
+        </FeatureGrid>
+      </div>
+      <div class="split__media" aria-hidden="true">
+        <div class="cards">
+          <div class="card-mock card-mock--1">
+            <span class="card-mock__title">Bedtime stories</span>
+            <span class="card-mock__sub">12 tracks · 48 min</span>
+          </div>
+          <div class="card-mock card-mock--2">
+            <span class="card-mock__title">Forest sounds</span>
+            <span class="card-mock__sub">Ambient · loop</span>
+          </div>
+          <div class="card-mock card-mock--3">
+            <span class="card-mock__title">Grandma reads</span>
+            <span class="card-mock__sub">Custom · 1h 12m</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="families" paddingY="lg">
+    <header class="section-header">
+      <span class="eyebrow">For families</span>
+      <h2>Audio that fits the way kids actually grow.</h2>
+      <p class="lead">
+        Built around the daily rituals of family life. No screens to fight over. No accounts for
+        kids. No content nobody asked for.
+      </p>
+    </header>
+
+    <FeatureGrid cols={3}>
+      <ConceptCard icon="shield" title="No screens, no ads">
+        <p>
+          Audio-only by design. No video, no autoplay rabbit hole, no banner blinking at you while
+          your kid tries to fall asleep.
+        </p>
+      </ConceptCard>
+      <ConceptCard icon="family" title="Parent-controlled">
+        <p>
+          You decide what's on each card. Curate playlists for bedtime, road trips, quiet time —
+          whatever the moment needs.
+        </p>
+      </ConceptCard>
+      <ConceptCard icon="spark" title="Grows with them">
+        <p>
+          Same device, new Whispers. Lullabies become stories become podcasts become language
+          practice. The hardware doesn't age out.
+        </p>
+      </ConceptCard>
+    </FeatureGrid>
+  </Section>
+
+  <Section id="developers-preview" variant="tech" paddingY="lg">
+    <div class="dev-cta">
+      <div class="dev-cta__content">
+        <span class="eyebrow">For developers</span>
+        <h2>Up and running in a few commands.</h2>
+        <p class="lead">
+          The whole stack is TypeScript, web standards, and boring tech that just works. Clone,
+          install, run. Self-host the dashboard, flash a Hush, ship your own Whispers.
+        </p>
+        <div class="dev-cta__actions">
+          <CTA href="/developers" variant="secondary" size="lg">Read the dev guide</CTA>
+          <CTA href={SITE.repo} variant="ghost" size="lg" external>View source</CTA>
+        </div>
+      </div>
+      <div class="dev-cta__code">
+        <CodeBlock
+          filename="terminal"
+          lang="bash"
+          code={`# Clone and run the dashboard locally
+git clone ${SITE.repo}.git
+cd openhush
+pnpm install
+pnpm --filter dashboard dev
+
+# Now author your first Whisper at http://localhost:3000`}
+        />
+      </div>
+    </div>
+  </Section>
+
+  <Section id="open-source" paddingY="lg">
+    <div class="manifesto">
+      <span class="eyebrow">Open-source manifesto</span>
+      <h2>The audio your family loves shouldn't be locked away.</h2>
+      <p class="lead">
+        OpenHush exists because audio for kids has become a walled garden. We think the opposite is
+        worth building: a player you can repair, content you can keep, code you can read, and a
+        community you can join.
+      </p>
+      <p class="lead">
+        It's <strong>{SITE.license}-licensed</strong>, built in public, and made better by every
+        contribution.
+      </p>
+      <div class="manifesto__cta">
+        <CTA href={SITE.repo} variant="primary" size="lg" external>Star on GitHub</CTA>
+        <CTA href="/developers" variant="ghost" size="lg">Start contributing</CTA>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .section-header {
+    max-width: 56ch;
+    margin-bottom: var(--space-7);
+  }
+  .section-header h2 {
+    margin-block: var(--space-3) var(--space-4);
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+    align-items: center;
+  }
+  .split--reverse .split__media {
+    order: 2;
+  }
+  .split__content h2 {
+    margin-block: var(--space-3) var(--space-4);
+  }
+  @media (max-width: 900px) {
+    .split,
+    .split--reverse {
+      grid-template-columns: 1fr;
+    }
+    .split--reverse .split__media {
+      order: -1;
+    }
+  }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-5);
+    display: grid;
+    gap: var(--space-3);
+  }
+  .checklist li {
+    position: relative;
+    padding-left: 2rem;
+    color: var(--color-muted);
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-accent-soft);
+    box-shadow: inset 0 0 0 2px var(--color-accent);
+  }
+  .checklist strong {
+    color: var(--color-fg);
+    font-weight: 600;
+  }
+
+  .mini-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+  }
+  .mini-card h4 {
+    font-size: var(--fs-300);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .mini-card p {
+    color: var(--color-muted);
+    font-size: var(--fs-200);
+  }
+
+  /* Hush mock illustration */
+  .hush-mock {
+    width: min(100%, 380px);
+    margin-inline: auto;
+    aspect-ratio: 4 / 5;
+    background: linear-gradient(180deg, var(--color-surface) 0%, #fbe6cf 100%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-5);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: var(--space-4);
+  }
+  .hush-mock__top {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .hush-mock__antenna {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 6px var(--color-accent-soft);
+  }
+  .hush-mock__screen {
+    background: var(--color-fg);
+    border-radius: var(--radius-md);
+    height: 56px;
+    display: grid;
+    place-items: center;
+  }
+  .hush-mock__bars {
+    display: flex;
+    align-items: end;
+    gap: 6px;
+    height: 32px;
+  }
+  .hush-mock__bars span {
+    width: 6px;
+    background: var(--color-accent-2);
+    border-radius: 3px;
+  }
+  .hush-mock__bars span:nth-child(1) { height: 30%; }
+  .hush-mock__bars span:nth-child(2) { height: 60%; }
+  .hush-mock__bars span:nth-child(3) { height: 90%; }
+  .hush-mock__bars span:nth-child(4) { height: 50%; }
+  .hush-mock__bars span:nth-child(5) { height: 70%; }
+  .hush-mock__face {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .hush-mock__knob {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 30% 30%, #fff, transparent 50%),
+      var(--color-accent);
+    box-shadow: var(--shadow-md);
+  }
+  .hush-mock__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .hush-mock__buttons span {
+    width: 28px;
+    height: 8px;
+    background: var(--color-border);
+    border-radius: 4px;
+  }
+  .hush-mock__slot {
+    background: rgba(31, 27, 23, 0.05);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-md);
+    height: 60px;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-mono);
+    font-size: var(--fs-100);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-muted);
+  }
+
+  /* Whisper cards mock */
+  .cards {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-width: 420px;
+    margin-inline: auto;
+  }
+  .card-mock {
+    position: absolute;
+    width: 70%;
+    aspect-ratio: 5 / 3;
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--duration) var(--ease-out);
+  }
+  .card-mock__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--fs-400);
+  }
+  .card-mock__sub {
+    font-family: var(--font-mono);
+    font-size: var(--fs-100);
+    opacity: 0.7;
+  }
+  .card-mock--1 {
+    background: var(--color-accent);
+    color: #fff;
+    top: 6%;
+    left: 4%;
+    transform: rotate(-6deg);
+  }
+  .card-mock--2 {
+    background: var(--color-accent-2);
+    color: var(--color-fg);
+    top: 30%;
+    left: 24%;
+    transform: rotate(2deg);
+  }
+  .card-mock--3 {
+    background: var(--color-accent-3);
+    color: #fff;
+    top: 56%;
+    left: 12%;
+    transform: rotate(-2deg);
+  }
+  .cards:hover .card-mock--1 { transform: rotate(-9deg) translate(-4px, -4px); }
+  .cards:hover .card-mock--2 { transform: rotate(4deg) translate(2px, -2px); }
+  .cards:hover .card-mock--3 { transform: rotate(-4deg) translate(-2px, 4px); }
+
+  /* Dev CTA section */
+  .dev-cta {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: var(--space-7);
+    align-items: center;
+  }
+  .dev-cta__content h2 {
+    margin-block: var(--space-3) var(--space-4);
+  }
+  .dev-cta__actions {
+    margin-top: var(--space-6);
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+  @media (max-width: 900px) {
+    .dev-cta {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .manifesto {
+    max-width: 60ch;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .manifesto h2 {
+    margin-block: var(--space-3) var(--space-4);
+  }
+  .manifesto .lead + .lead {
+    margin-top: var(--space-3);
+  }
+  .manifesto__cta {
+    margin-top: var(--space-6);
+    display: flex;
+    gap: var(--space-3);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

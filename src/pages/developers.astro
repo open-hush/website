@@ -1,0 +1,315 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import Section from "~/components/Section.astro";
+import DevQuickStart from "~/components/DevQuickStart.astro";
+import CodeBlock from "~/components/CodeBlock.astro";
+import FeatureGrid from "~/components/FeatureGrid.astro";
+import CTA from "~/components/CTA.astro";
+import { SITE } from "~/config/site";
+
+const steps = [
+  {
+    title: "Clone the repo",
+    description: "Pull the monorepo. The website, dashboard, and firmware all live together.",
+    code: `git clone ${SITE.repo}.git\ncd openhush`,
+    lang: "bash" as const,
+    filename: "terminal",
+  },
+  {
+    title: "Install dependencies",
+    description: "Everything is pnpm-based. One command, the whole stack.",
+    code: "pnpm install",
+    lang: "bash" as const,
+    filename: "terminal",
+  },
+  {
+    title: "Run the dashboard",
+    description: "The dashboard is where you author Whispers, manage devices, and bind cards.",
+    code: "pnpm --filter dashboard dev\n\n# Open http://localhost:3000",
+    lang: "bash" as const,
+    filename: "terminal",
+  },
+  {
+    title: "Configure your Hush",
+    description:
+      "Point your Hush at your dashboard URL. Local dev works over your home network — no public tunnel required.",
+    code: `// hush.config.ts
+export default {
+  dashboard: "http://192.168.1.42:3000",
+  cache: "./.audio-cache",
+  ledColor: "warm",
+} satisfies HushConfig;`,
+    lang: "ts" as const,
+    filename: "hush.config.ts",
+  },
+  {
+    title: "Author your first Whisper",
+    description:
+      "Upload audio, drop tracks into a playlist, scan a blank NFC card, and you're done. Tap on Hush — it plays.",
+    code: `// scripts/seed-whisper.ts
+import { createWhisper } from "@openhush/sdk";
+
+await createWhisper({
+  title: "Bedtime stories",
+  tracks: [
+    { src: "./audio/01-the-moon.mp3", title: "The moon" },
+    { src: "./audio/02-the-fox.mp3", title: "The fox" },
+  ],
+  cardUid: "04:A2:B7:33:5E",
+});`,
+    lang: "ts" as const,
+    filename: "scripts/seed-whisper.ts",
+  },
+];
+---
+
+<BaseLayout
+  title="Developers"
+  description="Self-host the OpenHush dashboard, author Whispers, and ship custom firmware. The full stack is TypeScript, open-source, and ready in a few commands."
+>
+  <Section variant="alt" paddingY="lg">
+    <div class="dev-hero">
+      <span class="eyebrow">Developer guide</span>
+      <h1>Build, fork, ship.</h1>
+      <p class="lead">
+        OpenHush is a TypeScript monorepo: a Next.js dashboard, an SDK for authoring Whispers, and
+        firmware that talks to both. Web standards. Boring tech. Cloneable in a minute.
+      </p>
+      <div class="dev-hero__ctas">
+        <CTA href="#quickstart" variant="secondary" size="lg">Quick start</CTA>
+        <CTA href={SITE.repo} variant="ghost" size="lg" external>Browse the repo</CTA>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="architecture" paddingY="lg">
+    <header class="header">
+      <span class="eyebrow">Architecture</span>
+      <h2>Three pieces, one stack.</h2>
+      <p class="lead">
+        Every layer speaks the same language and shares the same types. No hidden services, no
+        proprietary protocols.
+      </p>
+    </header>
+
+    <FeatureGrid cols={3}>
+      <article class="arch-card">
+        <h3>Hush (device)</h3>
+        <p>
+          Open-hardware speaker with NFC reader and offline-first audio cache. Firmware fetches
+          playlists from your dashboard and plays locally. Optional cloud sync for multi-device
+          households.
+        </p>
+        <code class="arch-card__tag">firmware · NFC · audio</code>
+      </article>
+      <article class="arch-card">
+        <h3>Whispers (cards)</h3>
+        <p>
+          NFC tags bound to playlists in your library. Pre-printed sets ship with art and audio;
+          blank cards let you bind anything to anything. Tap → play. Remove → stop.
+        </p>
+        <code class="arch-card__tag">NFC · playlists · binding</code>
+      </article>
+      <article class="arch-card">
+        <h3>Dashboard</h3>
+        <p>
+          Next.js app for authoring Whispers, uploading audio, managing devices, and seeing
+          what's been played. Self-host on your LAN, a Pi, or a VPS — your call.
+        </p>
+        <code class="arch-card__tag">Next.js · Drizzle · self-hosted</code>
+      </article>
+    </FeatureGrid>
+  </Section>
+
+  <Section id="quickstart" variant="alt" paddingY="lg">
+    <header class="header">
+      <span class="eyebrow">Quick start</span>
+      <h2>From clone to first Whisper in under five minutes.</h2>
+      <p class="lead">
+        No accounts to create, no API keys to wait for. Everything runs locally first; sync to the
+        cloud only if you want to.
+      </p>
+    </header>
+    <DevQuickStart steps={steps} />
+  </Section>
+
+  <Section id="stack" paddingY="lg">
+    <header class="header">
+      <span class="eyebrow">Stack</span>
+      <h2>What's under the hood.</h2>
+      <p class="lead">Boring, well-supported, well-documented technology. On purpose.</p>
+    </header>
+
+    <ul class="stack">
+      <li><strong>TypeScript</strong> — strict mode, end to end.</li>
+      <li><strong>Next.js + React</strong> — for the dashboard and authoring tools.</li>
+      <li><strong>Drizzle ORM + SQLite</strong> — local-first database, runs anywhere.</li>
+      <li><strong>NextAuth</strong> — authentication for the dashboard.</li>
+      <li><strong>pnpm workspaces</strong> — one repo, many packages.</li>
+      <li><strong>Astro</strong> — for this very website.</li>
+      <li><strong>Open hardware</strong> — schematics in the repo, BOM listed, no NDAs.</li>
+    </ul>
+  </Section>
+
+  <Section id="sdk" variant="alt" paddingY="lg">
+    <header class="header">
+      <span class="eyebrow">SDK preview</span>
+      <h2>Author Whispers programmatically.</h2>
+      <p class="lead">
+        The SDK is a thin TypeScript wrapper over the dashboard API. Build importers, scripts, or
+        full integrations.
+      </p>
+    </header>
+
+    <div class="sdk-grid">
+      <CodeBlock
+        filename="bind-card.ts"
+        lang="ts"
+        code={`import { OpenHush } from "@openhush/sdk";
+
+const hush = new OpenHush({
+  baseUrl: process.env.DASHBOARD_URL!,
+  token: process.env.OPENHUSH_TOKEN!,
+});
+
+const whisper = await hush.whispers.create({
+  title: "Forest sounds",
+  description: "Ambient loop for quiet time.",
+  tracks: ["./audio/birds.mp3", "./audio/leaves.mp3"],
+});
+
+await hush.cards.bind({
+  cardUid: "04:A2:B7:33:5E",
+  whisperId: whisper.id,
+});`}
+      />
+      <CodeBlock
+        filename="webhook.ts"
+        lang="ts"
+        code={`import { onPlayback } from "@openhush/sdk/events";
+
+onPlayback(async (event) => {
+  // Log, analyze, or react however you like.
+  console.log(\`[\${event.deviceId}] \${event.whisper.title}\`);
+
+  if (event.track.title === "The moon") {
+    await dim_lights_in_kids_room();
+  }
+});`}
+      />
+    </div>
+  </Section>
+
+  <Section id="contribute" paddingY="lg">
+    <header class="header">
+      <span class="eyebrow">Contribute</span>
+      <h2>This is a community project.</h2>
+      <p class="lead">
+        Bugs, ideas, hardware mods, audio packs, translations — all welcome. Open an issue, send a
+        PR, or just say hi.
+      </p>
+    </header>
+    <div class="contribute-ctas">
+      <CTA href={SITE.repo} variant="primary" size="lg" external>Open the repo</CTA>
+      <CTA href={`${SITE.repo}/issues`} variant="ghost" size="lg" external>Browse issues</CTA>
+    </div>
+    <p class="muted small">
+      Code of conduct, contribution guide, and roadmap live in the repo. Licensed under {SITE.license}.
+    </p>
+  </Section>
+</BaseLayout>
+
+<style>
+  .dev-hero {
+    max-width: 60ch;
+  }
+  .dev-hero h1 {
+    margin-block: var(--space-3) var(--space-4);
+  }
+  .dev-hero__ctas {
+    margin-top: var(--space-5);
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .header {
+    max-width: 60ch;
+    margin-bottom: var(--space-7);
+  }
+  .header h2 {
+    margin-block: var(--space-3) var(--space-4);
+  }
+
+  .arch-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .arch-card h3 {
+    font-size: var(--fs-500);
+    font-weight: 600;
+  }
+  .arch-card p {
+    color: var(--color-muted);
+  }
+  .arch-card__tag {
+    margin-top: auto;
+    font-family: var(--font-mono);
+    font-size: var(--fs-100);
+    color: var(--color-accent);
+    background: var(--color-accent-soft);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+    align-self: flex-start;
+  }
+
+  .stack {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+    font-size: var(--fs-300);
+  }
+  .stack li {
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+  .stack strong {
+    font-weight: 600;
+  }
+  @media (max-width: 700px) {
+    .stack {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .sdk-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+  @media (max-width: 900px) {
+    .sdk-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .contribute-ctas {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-4);
+  }
+  .small {
+    font-size: var(--fs-100);
+  }
+</style>
