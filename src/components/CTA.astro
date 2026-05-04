@@ -25,41 +25,43 @@ const target = external ? "_blank" : undefined;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    font-weight: 600;
+    gap: var(--space-2);
+    font-weight: 700;
     border-radius: var(--radius-pill);
     transition:
       transform var(--duration-fast) var(--ease-out),
       background var(--duration-fast) var(--ease-out),
       color var(--duration-fast) var(--ease-out),
-      border-color var(--duration-fast) var(--ease-out);
+      border-color var(--duration-fast) var(--ease-out),
+      filter var(--duration-fast) var(--ease-out);
     border: 1px solid transparent;
     white-space: nowrap;
+    min-height: var(--hit-target-min);
   }
   .cta--md {
-    padding: 0.65rem 1.2rem;
+    padding: var(--space-3) var(--space-5);
     font-size: var(--fs-200);
   }
   .cta--lg {
-    padding: 0.95rem 1.6rem;
+    padding: var(--space-4) var(--space-6);
     font-size: var(--fs-300);
   }
   .cta--primary {
     background: var(--color-fg);
-    color: var(--color-bg);
+    color: var(--color-neutral);
   }
   .cta--primary:hover {
     background: var(--color-accent);
-    color: #fff;
+    color: var(--color-fg);
     transform: translateY(-1px);
   }
   .cta--secondary {
     background: var(--color-accent);
-    color: #fff;
+    color: var(--color-fg);
   }
   .cta--secondary:hover {
     background: var(--color-fg);
-    color: var(--color-bg);
+    color: var(--color-neutral);
     transform: translateY(-1px);
   }
   .cta--ghost {
@@ -71,5 +73,20 @@ const target = external ? "_blank" : undefined;
     border-color: var(--color-fg);
     color: var(--color-fg);
     transform: translateY(-1px);
+  }
+
+  .cta:focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 3px;
+  }
+  .cta:active {
+    transform: translateY(0);
+    filter: brightness(0.95);
+  }
+  .cta[aria-disabled="true"],
+  .cta[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
   }
 </style>

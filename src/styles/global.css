@@ -1,10 +1,9 @@
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
-@import "@fontsource/inter/700.css";
-@import "@fontsource/fraunces/400.css";
-@import "@fontsource/fraunces/600.css";
-@import "@fontsource/fraunces/700.css";
+@import "@fontsource/nunito/400.css";
+@import "@fontsource/nunito/500.css";
+@import "@fontsource/nunito/600.css";
+@import "@fontsource/nunito/700.css";
+@import "@fontsource/nunito/800.css";
+@import "@fontsource/nunito/900.css";
 @import "@fontsource/jetbrains-mono/400.css";
 @import "@fontsource/jetbrains-mono/500.css";
 
@@ -71,27 +70,28 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.15;
+  font-weight: 700;
+  line-height: 1.2;
   letter-spacing: -0.01em;
   color: var(--color-fg);
 }
 
 h1 {
-  font-size: var(--fs-900);
+  font-size: var(--fs-600);
+  font-weight: 800;
   letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: var(--fs-700);
-}
-
-h3 {
   font-size: var(--fs-500);
 }
 
-h4 {
+h3 {
   font-size: var(--fs-400);
+}
+
+h4 {
+  font-size: var(--fs-300);
 }
 
 a {
@@ -101,19 +101,19 @@ a {
 }
 
 a:hover {
-  color: var(--color-accent);
+  color: var(--color-primary-strong);
 }
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-focus-ring);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
 
 ::selection {
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-neutral);
 }
 
 code,
@@ -121,15 +121,15 @@ kbd,
 pre,
 samp {
   font-family: var(--font-mono);
-  font-size: 0.95em;
+  font-size: var(--fs-200);
 }
 
 :not(pre) > code {
   background: var(--color-accent-soft);
   color: var(--color-fg);
-  padding: 0.15em 0.4em;
+  padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-sm);
-  font-size: 0.9em;
+  font-size: var(--fs-200);
 }
 
 pre {
@@ -142,7 +142,7 @@ pre {
 
 ul,
 ol {
-  padding-left: 1.25rem;
+  padding-left: var(--space-5);
 }
 
 hr {
@@ -151,7 +151,7 @@ hr {
 }
 
 [id] {
-  scroll-margin-top: calc(var(--nav-height) + 1rem);
+  scroll-margin-top: calc(var(--nav-height) + var(--space-4));
 }
 
 /* Layout helpers */
@@ -170,10 +170,10 @@ hr {
   display: inline-block;
   font-family: var(--font-mono);
   font-size: var(--fs-100);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-primary-strong);
   margin-bottom: var(--space-4);
 }
 

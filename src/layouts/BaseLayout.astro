@@ -38,7 +38,7 @@ const jsonLd = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#FFF8F1" />
+    <meta name="theme-color" content="#FFFFFF" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonical} />
 
@@ -70,17 +70,20 @@ const jsonLd = {
     <style>
       .skip-link {
         position: absolute;
-        top: -40px;
+        top: calc(var(--hit-target-min) * -1);
         left: var(--space-4);
         background: var(--color-fg);
-        color: var(--color-bg);
-        padding: 0.5rem 1rem;
+        color: var(--color-neutral);
+        padding: var(--space-2) var(--space-4);
         border-radius: var(--radius-sm);
         z-index: 100;
         transition: top var(--duration-fast) var(--ease-out);
       }
-      .skip-link:focus {
+      .skip-link:focus,
+      .skip-link:focus-visible {
         top: var(--space-4);
+        outline: 2px solid var(--color-focus-ring);
+        outline-offset: 3px;
       }
     </style>
   </body>

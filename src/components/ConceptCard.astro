@@ -79,17 +79,17 @@ const { icon, title } = Astro.props;
     border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
   }
   .card__icon {
-    width: 44px;
-    height: 44px;
+    width: var(--hit-target-min);
+    height: var(--hit-target-min);
     border-radius: var(--radius-md);
     display: grid;
     place-items: center;
     background: var(--color-accent-soft);
-    color: var(--color-accent);
+    color: var(--color-primary-strong);
   }
   .card__title {
     font-size: var(--fs-500);
-    font-weight: 600;
+    font-weight: 700;
   }
   .card__body {
     color: var(--color-muted);

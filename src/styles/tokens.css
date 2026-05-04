@@ -1,68 +1,90 @@
-:root {
-  /* Warm family palette (default) */
-  --color-bg: #fff8f1;
-  --color-fg: #1f1b17;
-  --color-muted: #6b5e54;
-  --color-accent: #e8643c;
-  --color-accent-soft: #fce0d4;
-  --color-accent-2: #f5c26b;
-  --color-accent-3: #7aa17a;
-  --color-surface: #ffffff;
-  --color-border: #efe3d4;
+/* ============================================================================
+   OpenHush design tokens
 
-  /* Tech palette (used in dev sections and code) */
+   Source of truth for code. Mirrors the canonical contract in /design.md and
+   adds derived tokens needed by the implementation. Do not bypass — if you
+   need a value, add a token here first.
+   ============================================================================ */
+
+:root {
+  /* --- Canonical palette (design.md) ------------------------------------ */
+  --color-primary: #58cc02;
+  --color-secondary: #ce82ff;
+  --color-success: #58cc02;
+  --color-warning: #ffc800;
+  --color-danger: #ff4b4b;
+  --color-surface: #ffffff;
+  --color-fg: #3c3c3c;
+  --color-neutral: #ffffff;
+
+  /* --- Derived tokens (extension — see design.md > Extensions) ---------- */
+  --color-bg: var(--color-surface);
+  --color-muted: #6f6f6f;
+  --color-border: #e5e5e5;
+  --color-accent-soft: #dff5c2;
+  --color-accent: var(--color-primary);
+  /* AA-compliant variants for foreground use on light backgrounds.
+     Bright canonical colors (#58cc02, #ce82ff) fail WCAG AA on white,
+     so use these wherever primary/secondary appear as text or icon. */
+  --color-primary-strong: #3d8c00;   /* 4.24:1 on white, 3.63:1 on accent-soft */
+  --color-secondary-strong: #9333d9; /* 5.65:1 on white */
+  --color-focus-ring: var(--color-secondary-strong);
+
+  /* --- Tech palette (used in dev sections and code) -------------------- */
   --color-tech-bg: #0e1117;
   --color-tech-surface: #161b22;
   --color-tech-fg: #e6edf3;
   --color-tech-muted: #8b949e;
   --color-tech-border: #30363d;
-  --color-tech-accent: #7ee787;
+  --color-tech-accent: var(--color-primary);
+  --color-tech-titlebar: #3a4151;
 
-  /* Type scale (modular, ratio 1.25) */
-  --fs-100: 0.875rem;
-  --fs-200: 1rem;
-  --fs-300: 1.125rem;
-  --fs-400: 1.25rem;
-  --fs-500: 1.563rem;
-  --fs-600: 1.953rem;
-  --fs-700: 2.441rem;
-  --fs-800: 3.052rem;
-  --fs-900: clamp(2.5rem, 6vw, 4.2rem);
+  /* --- Type scale (canonical: 12/14/16/20/24/32) ----------------------- */
+  --fs-100: 0.75rem;   /* 12 */
+  --fs-200: 0.875rem;  /* 14 */
+  --fs-300: 1rem;      /* 16 — body */
+  --fs-400: 1.25rem;   /* 20 */
+  --fs-500: 1.5rem;    /* 24 */
+  --fs-600: 2rem;      /* 32 — h1 */
 
-  /* Spacing */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
+  /* --- Spacing (canonical: 4/8/12/16/24/32) ---------------------------- */
+  --space-1: 0.25rem;  /* 4 */
+  --space-2: 0.5rem;   /* 8 */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-5: 1.5rem;   /* 24 */
+  --space-6: 2rem;     /* 32 */
+
+  /* Extension: section-level vertical padding (not in design.md scale) */
   --space-7: clamp(2rem, 5vw, 4rem);
   --space-8: clamp(3rem, 8vw, 6rem);
   --space-9: clamp(4rem, 10vw, 8rem);
 
-  /* Radii */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  /* --- Radii (canonical: sm 4 / md 8 + documented extensions) ---------- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;   /* extension — cards, mini-cards, code blocks */
+  --radius-xl: 24px;   /* extension — device mock */
   --radius-pill: 999px;
 
-  /* Fonts */
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  /* --- Fonts (canonical: Nunito + JetBrains Mono) ---------------------- */
+  --font-sans: "Nunito", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-sans);
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(31, 27, 23, 0.06);
-  --shadow-md: 0 8px 24px rgba(31, 27, 23, 0.08);
-  --shadow-lg: 0 24px 48px rgba(31, 27, 23, 0.1);
+  /* --- Shadows ---------------------------------------------------------- */
+  --shadow-sm: 0 1px 2px rgba(60, 60, 60, 0.08);
+  --shadow-md: 0 8px 24px rgba(60, 60, 60, 0.10);
+  --shadow-lg: 0 24px 48px rgba(60, 60, 60, 0.14);
 
-  /* Layout */
+  /* --- Layout (extension) ---------------------------------------------- */
   --container-max: 72rem;
   --container-prose: 42rem;
   --nav-height: 64px;
+  --icon-stroke: 2px;
+  --hit-target-min: 44px;
 
-  /* Motion */
+  /* --- Motion ----------------------------------------------------------- */
   --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
   --duration-fast: 150ms;
   --duration: 250ms;
@@ -75,5 +97,9 @@
   --color-surface: var(--color-tech-surface);
   --color-border: var(--color-tech-border);
   --color-accent: var(--color-tech-accent);
-  --color-accent-soft: rgba(126, 231, 135, 0.12);
+  --color-accent-soft: rgba(88, 204, 2, 0.18);
+  /* On dark bg the bright primary already passes contrast (~9:1 on tech-bg),
+     so the "strong" variants fall back to the canonical colors. */
+  --color-primary-strong: var(--color-primary);
+  --color-secondary-strong: var(--color-secondary);
 }

@@ -66,7 +66,7 @@ import CTA from "~/components/CTA.astro";
     overflow: hidden;
     background:
       radial-gradient(60% 60% at 80% 20%, var(--color-accent-soft) 0%, transparent 60%),
-      radial-gradient(50% 50% at 10% 90%, rgba(245, 194, 107, 0.35) 0%, transparent 60%),
+      radial-gradient(50% 50% at 10% 90%, color-mix(in srgb, var(--color-warning) 35%, transparent) 0%, transparent 60%),
       var(--color-bg);
   }
   .hero::before {
@@ -74,8 +74,9 @@ import CTA from "~/components/CTA.astro";
     position: absolute;
     inset: 0;
     background-image:
-      radial-gradient(circle at 1px 1px, rgba(31, 27, 23, 0.06) 1px, transparent 0);
+      radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--color-fg) 6%, transparent) 1px, transparent 0);
     background-size: 28px 28px;
+    /* mask-image alpha — black is conventional, not a brand color */
     mask-image: linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent);
     pointer-events: none;
   }
@@ -91,14 +92,14 @@ import CTA from "~/components/CTA.astro";
   }
 
   .hero__title {
-    font-size: var(--fs-900);
-    line-height: 1.05;
+    font-size: var(--fs-600);
+    font-weight: 900;
+    line-height: 1.1;
   }
   .hero__title-accent {
     display: block;
-    color: var(--color-accent);
-    font-style: italic;
-    font-weight: 500;
+    color: var(--color-primary-strong);
+    font-weight: 800;
   }
   .hero__lead {
     margin-top: var(--space-5);
@@ -109,7 +110,7 @@ import CTA from "~/components/CTA.astro";
   }
   .hero__lead strong {
     color: var(--color-fg);
-    font-weight: 600;
+    font-weight: 700;
   }
   .hero__ctas {
     margin-top: var(--space-6);
@@ -123,14 +124,14 @@ import CTA from "~/components/CTA.astro";
     color: var(--color-muted);
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-2);
   }
   .hero__dot {
-    width: 8px;
-    height: 8px;
+    width: var(--space-2);
+    height: var(--space-2);
     border-radius: 50%;
-    background: var(--color-accent-3);
-    box-shadow: 0 0 0 4px rgba(122, 161, 122, 0.2);
+    background: var(--color-success);
+    box-shadow: 0 0 0 var(--space-1) color-mix(in srgb, var(--color-success) 20%, transparent);
     display: inline-block;
   }
 
@@ -144,7 +145,7 @@ import CTA from "~/components/CTA.astro";
     position: relative;
     width: min(100%, 360px);
     aspect-ratio: 4 / 5;
-    background: linear-gradient(180deg, #fff 0%, #fdeed8 100%);
+    background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-accent-soft) 100%);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-lg);
@@ -168,15 +169,15 @@ import CTA from "~/components/CTA.astro";
   }
   .device__wave {
     width: 70%;
-    height: 56px;
+    height: var(--space-7);
     background-image:
-      linear-gradient(90deg, var(--color-accent) 0 12%, transparent 12% 22%),
-      linear-gradient(90deg, var(--color-accent-2) 0 8%, transparent 8% 22%),
-      linear-gradient(90deg, var(--color-accent) 0 16%, transparent 16% 22%);
-    background-size: 100% 8px, 100% 16px, 100% 28px;
+      linear-gradient(90deg, var(--color-primary) 0 12%, transparent 12% 22%),
+      linear-gradient(90deg, var(--color-warning) 0 8%, transparent 8% 22%),
+      linear-gradient(90deg, var(--color-secondary) 0 16%, transparent 16% 22%);
+    background-size: 100% var(--space-2), 100% var(--space-4), 100% var(--space-6);
     background-position: 0 50%;
     background-repeat: no-repeat;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
     animation: pulse 2.4s var(--ease-out) infinite;
   }
   @keyframes pulse {
@@ -197,11 +198,11 @@ import CTA from "~/components/CTA.astro";
   }
   .device__buttons {
     display: flex;
-    gap: 0.45rem;
+    gap: var(--space-2);
   }
   .device__buttons span {
-    width: 14px;
-    height: 14px;
+    width: var(--space-3);
+    height: var(--space-3);
     border-radius: 50%;
     background: var(--color-border);
   }
@@ -209,7 +210,7 @@ import CTA from "~/components/CTA.astro";
     background: var(--color-accent);
   }
   .device__slot {
-    background: rgba(31, 27, 23, 0.04);
+    background: color-mix(in srgb, var(--color-fg) 4%, transparent);
     border-radius: var(--radius-md);
     padding: var(--space-3);
     display: grid;
@@ -219,7 +220,7 @@ import CTA from "~/components/CTA.astro";
   .whisper {
     width: 100%;
     aspect-ratio: 5 / 2;
-    background: var(--color-accent-2);
+    background: var(--color-warning);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
     padding: var(--space-3);
@@ -229,22 +230,22 @@ import CTA from "~/components/CTA.astro";
     transform: rotate(2deg);
   }
   .whisper__dot {
-    width: 14px;
-    height: 14px;
+    width: var(--space-3);
+    height: var(--space-3);
     border-radius: 50%;
     background: var(--color-fg);
     flex-shrink: 0;
   }
   .whisper__lines {
     display: grid;
-    gap: 6px;
+    gap: var(--space-1);
     width: 100%;
   }
   .whisper__lines span {
     display: block;
-    height: 6px;
-    background: rgba(31, 27, 23, 0.4);
-    border-radius: 3px;
+    height: var(--space-1);
+    background: color-mix(in srgb, var(--color-fg) 40%, transparent);
+    border-radius: var(--radius-sm);
   }
   .whisper__lines span:last-child {
     width: 60%;
