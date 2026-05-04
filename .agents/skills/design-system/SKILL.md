@@ -15,10 +15,10 @@ OpenHush aims for a clear, confident, and friendly visual style: bright accents,
 
 ## Sources of truth
 
-- **`src/styles/tokens.css`** — operational source of truth. Every CSS variable consumed by components lives here.
-- **`design.md`** — design intent (frontmatter spec). Used as a reference, but the code does not read it.
+- **`design.md`** — **canonical** design contract (frontmatter spec). Defines the brand palette, typography, spacing, and radii. When intent and implementation diverge, this is the authoritative side.
+- **`src/styles/tokens.css`** — operational mirror of `design.md`. Every CSS variable consumed by components lives here. May add **derived tokens** (extensions) that the canonical contract doesn't cover, but those must be documented under `design.md > Extensions`.
 
-When in conflict, **`tokens.css` wins for code**. Drift between the two must be flagged, never silently propagated.
+When in conflict, **`design.md` wins**: update `tokens.css` to match, not the other way around. Drift in either direction must be flagged, never silently propagated. Adding a new derived token requires a matching entry in `design.md > Extensions`.
 
 ---
 
@@ -143,7 +143,7 @@ Compare:
 - Typography fonts in `design.md` vs. `--font-*`.
 - Spacing/radius scales in `design.md` vs. `--space-*` / `--radius-*`.
 
-Report any value present in one but missing or different in the other. **Do not auto-fix this** — surface it to the user and ask which side is canonical.
+Report any value present in one but missing or different in the other. `design.md` is canonical, so the default resolution is to update `tokens.css` to match. **Do not auto-fix without surfacing the drift first** — the user may want to amend the canonical contract instead, in which case `design.md` is what changes. If the divergent value in `tokens.css` is a legitimate derived token (e.g., a strong/AA variant of a canonical color, a section-level spacing step), promote it to `design.md > Extensions` rather than deleting it.
 
 ### Step 3 — Report format
 
@@ -151,11 +151,11 @@ Report any value present in one but missing or different in the other. **Do not 
 ## Design audit
 
 ### Raw values (should be tokens)
-- src/components/Hero.astro:42 — color: #e8643c → use var(--color-primary)
+- src/components/Hero.astro:42 — color: #58cc02 → use var(--color-primary)
 - ...
 
 ### design.md ↔ tokens.css drift
-- primary: design.md says #58cc02, tokens.css uses #e8643c (--color-accent)
+- primary: design.md says #58cc02, tokens.css uses #4cb002 (--color-primary) — update tokens.css to match canonical
 - ...
 
 ### Accessibility findings

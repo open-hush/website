@@ -17,7 +17,8 @@ Astro 5 static site, vanilla CSS, TypeScript strict. **Zero JS by default** — 
 
 - **`src/config/site.ts`** — single source for site metadata (`SITE`) and `NAV_LINKS`. Edit here, not in components.
 - **`src/layouts/BaseLayout.astro`** — owns `<head>`, SEO, OpenGraph, JSON-LD, skip link, `<Nav>` and `<Footer>`. All pages should wrap in this layout and pass `title` / `description` / `pathname`.
-- **`src/styles/tokens.css`** — operational source of truth for the design system (colors, type scale `--fs-*`, spacing `--space-*`, radii, fonts, shadows, motion). A `[data-theme="tech"]` block remaps semantic tokens for dark/tech sections (used in dev pages and code blocks).
+- **`design.md`** — **canonical** design contract. Defines the brand palette, typography, spacing, and radii; an `Extensions` section documents derived tokens that the contract doesn't cover. When `design.md` and `tokens.css` diverge, `design.md` wins — update `tokens.css` to match.
+- **`src/styles/tokens.css`** — operational mirror of `design.md`. Holds every CSS variable consumed by components (colors, type scale `--fs-*`, spacing `--space-*`, radii, fonts, shadows, motion). A `[data-theme="tech"]` block remaps semantic tokens for dark/tech sections (used in dev pages and code blocks).
 - **`src/styles/global.css`** — reset and base styles only.
 - **Path alias `~/*` → `src/*`** (configured in `tsconfig.json`). Use it in imports instead of relative paths.
 - **`@astrojs/sitemap`** integration emits `/sitemap-index.xml` automatically; site origin is hardcoded to `https://open-hush.com` in `astro.config.mjs`.
@@ -29,7 +30,7 @@ This repo has a project-specific **`design-system`** skill (`.claude/skills/desi
 1. Never write raw hex colors, raw `px`/`rem` font sizes, raw spacing values, raw `border-radius` px, raw `font-family`, or invented shadows in `.astro`/`.css`/inline styles. Always use `var(--color-*)`, `var(--fs-*)`, `var(--space-*)`, `var(--radius-*)`, `var(--font-*)`, `var(--shadow-*)`.
 2. If a needed token doesn't exist, **add it to `tokens.css` first**, then reference it. Do not bypass.
 3. Prefer semantic tokens (`--color-fg`, `--color-surface`, `--color-border`) over accent tokens for structural elements so components respect the `data-theme="tech"` override automatically — don't duplicate theme rules.
-4. `design.md` is design intent (frontmatter spec); `tokens.css` is what code reads. When they disagree, `tokens.css` wins for code, but flag the drift instead of silently propagating it.
+4. `design.md` is the canonical design contract; `tokens.css` is what code reads and must mirror it. When they disagree, **`design.md` wins** — update `tokens.css` to match (or, if the divergent value belongs in the system, promote it to `design.md > Extensions`). Flag drift, never silently propagate it.
 5. Every interactive element must define `:hover`, `:focus-visible`, `:active`, and `[disabled]` states. Hit areas ≥ 24×24 CSS px.
 
 Exceptions to the "no raw values" rule: `tokens.css` itself, third-party CSS imports, and SVG `fill`/`stroke` inside `public/` assets.
