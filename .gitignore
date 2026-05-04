@@ -25,3 +25,7 @@ pnpm-debug.log*
 # editors
 .vscode/
 .idea/
+
+# local visual-review artifacts (screenshots, browser snapshots)
+.review/
+.playwright-mcp/
