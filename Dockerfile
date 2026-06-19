@@ -9,7 +9,7 @@ WORKDIR /app
 ENV NODE_ENV="production"
 
 # Enable pnpm via corepack
-RUN corepack enable && corepack prepare pnpm@10.11.0 --activate
+RUN corepack enable && corepack prepare pnpm@10.33.0 --activate
 
 
 # Throw-away build stage to reduce size of final image
